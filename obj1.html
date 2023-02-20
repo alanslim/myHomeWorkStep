@@ -3,18 +3,41 @@
 
 
 function test_newEmploye(){
-	let args = ["ИвановАмир", "12.12.2012", "менеджер", "80000"];
-	let res = {id:-1, errorDescription:"lastName not specified"};
+
+
+	let args = ["Иванов Амир", "12.12.2012", "менеджер", "80000"];
+	let res = {id:0, errorDescription:""};
 	let result = newEmployee(...args);
 	console.assert(JSON.stringify(result) === JSON.stringify(res), "test 1 failed", result) ;
 
+
+
+
+
+
+
+	 args = ["ИвановАмир", "12.12.2012", "менеджер", "80000"];
+	res = {id:-1, errorDescription:"lastName not specified"};
+	result = newEmployee(...args);
+	console.assert(JSON.stringify(result) === JSON.stringify(res), "test 2 failed", result) ;
+
+
+
+
+	args = ["Иванов Амир", "12.12.2012", "", "80000"];
+	res = {id:-1, errorDescription:'position not specified'};
+	console.assert(JSON.stringify(newEmployee(...args)) === JSON.stringify(res), "test 3 failed") ;
+
+
+
+
 	args = ["Иванов Амир", "12.12.2012", "менеджер", "80000"];
-	res = {id:-1, errorDescription:'Exist'};
-	console.assert(JSON.stringify(newEmployee(...args)) === JSON.stringify(res), "test 2 failed") ;
+	res = {id:-1, errorDescription:'Exists'};
+	console.assert(JSON.stringify(newEmployee(...args)) === JSON.stringify(res), "test 4 failed") ;
 
 	args = ["Петров Амир", "", "менеджер", "80000"];
 	res = {id:-1, errorDescription:'birthDate not specified'};
-	console.assert(JSON.stringify(newEmployee(...args)) === JSON.stringify(res), "test 3 failed") ;
+	console.assert(JSON.stringify(newEmployee(...args)) === JSON.stringify(res), "test 5 failed") ;
 
 	args = ["Петров Амир", "12.12.2012", "менеждер", "800000"];
     res = JSON.stringify({
@@ -22,7 +45,7 @@ function test_newEmploye(){
         errorDescription: "birthDate not specified"
     });
 
-    console.assert(JSON.stringify(newEmployee(...args)) !== JSON.stringify(res), 'Test 4 failed!');
+    console.assert(JSON.stringify(newEmployee(...args)) !== JSON.stringify(res), 'Test 6 failed!');
 
 
 
@@ -35,7 +58,7 @@ function test_newEmploye(){
 		birthDate: '',
 		hiredDate: '',
 		position: '',
-		salary: ''
+		salary: 0
 
 
 	}
@@ -58,8 +81,8 @@ function newEmployee(fullName, birthDate, position, salary){
 	if(!position) return{id: -1, errorDescription: `position not specified`};
 	if(!salary) return{id: -1, errorDescription: `salary not specified`};
 
-	for(let i of database){
-		if(i.firstName === firstName && i.lastName === lastName){
+	for(let x of database){
+		if(x.firstName === firstName && x.lastName === lastName){
 			return{id: -1, errorDescription: `Exists`}
 		}
 	}
@@ -81,7 +104,7 @@ function newEmployee(fullName, birthDate, position, salary){
 	worker.birthDate = birthDate.toDateString;
 
 	worker.position = position;
-	
+
 	worker.salary = salary;
 
 
