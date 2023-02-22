@@ -4,7 +4,7 @@
 
 function test_newEmploye(){
 
-
+	newEmployee("Алан Алтындиш", "30.10.1997", "суетолог", "500000");
 
 
 
@@ -59,14 +59,14 @@ function test_newEmploye(){
 
 }
 
-	let employeeProto = {
-		id: -1,
-		firstName: '',
-		lastName: '',
-		birthDate: '',
-		hiredDate: '',
-		position: '',
-		salary: 0
+	function Employee() {
+		this.id = -1;
+		this.firstName = '';
+		this.lastName = '';
+		this.birthDate = '';
+		this.hiredDate = '';
+		this.position = '';
+		this.salary = 0;
 
 
 	}
@@ -79,6 +79,16 @@ var database = [];
 //function to add new employee
 
 test_newEmploye();
+
+
+
+
+
+
+
+
+
+
 
 function newEmployee(fullName, birthDate, position, salary){
 	let [firstName, lastName] = fullName.split(' ');
@@ -95,7 +105,7 @@ function newEmployee(fullName, birthDate, position, salary){
 		}
 	}
 
-	let worker = employeeProto;
+	let worker = new Employee();
 
 	worker.id = database.length;
 

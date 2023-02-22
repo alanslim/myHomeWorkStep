@@ -1,0 +1,63 @@
+<script type="text/javascript">
+	
+function Person(birhDate, gender){
+	this.birhDate = birhDate;
+	this.gender = gender;
+
+}
+
+function Teacher(birhDate, gender, lesson){
+	this.__proto__ = Person.prototype;
+	this.constructor(birhDate, gender);
+	this.lesson = lesson;
+
+	this.setMarkToStudent = function(student, mark){
+		if (student.listOfLessons.indexOf(this.lesson) >=0) { //находим учится ли студент у нас
+			for (let i in student.marks) { 
+				if(student.marks[i].lesson === this.lesson) {
+					student.marks[i].mark = mark; break;
+				}
+			}
+		}
+
+	}
+}
+
+function Student(birhDate, gender, listOfLessons){
+
+	this.__proto__ = Person.prototype;
+	this.constructor(birhDate, gender);
+	this.listOfLessons = listOfLessons;
+	this.marks = [];
+	for(let k of listOfLessons) this.marks.push({lesson: k, mark: 0});
+}
+
+Amir = new Student("01.01.2001", "male", ["design", "history"]);
+Rima = new Student("11.04.1999", "female", ["math", "js"]);
+Boba = new Student("13.12.2004", "male", ["design", "math"]);
+Papich = new Student("14.10.1991", "male", ["design", "math", "js"]);
+
+Alexander = new Teacher("12.11.1928", "dedulya", "math");
+
+Natasha = new Teacher("12.03.1991", "milf", "design");
+
+Vyacheslav = new Teacher("15.06.1988", "them/they", "js");
+
+Vasya = new Teacher("14.88.1941", "addidas", "history");
+
+
+Alexander.setMarkToStudent(Papich, 5);
+Natasha.setMarkToStudent(Boba, 3);
+Vyacheslav.setMarkToStudent(Rima, 5);
+
+
+
+
+
+
+
+
+
+
+
+</script>
