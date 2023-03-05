@@ -1,0 +1,76 @@
+<script type="text/javascript">
+	
+function checkBrackets(str) { //создаем функцию
+  let stack = []; //создаем стек куда будем добавлять элементы
+  let openingBrackets = ['(', '[', '{']; //первый массив открывающих скобок
+  let closingBrackets = [')', ']', '}']; //второй массив закрывающих скобок
+
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    if (openingBrackets.includes(char)) { //Если символ является открывающей скобкой, то добавляем его в stack
+      stack.push(char); 
+    } else if (closingBrackets.includes(char)) {
+      if (stack.length === 0) {
+        return i + 1;
+      }
+      let top = stack.pop();//удаляет последний элемент стека и возвращает его
+      if ((top === '(' && char !== ')') || (top === '[' && char !== ']') || (top === '{' && char !== '}')) { //Если символ является закрывающей скобкой, то проверяем его на согласованность с последней открывающей скобкой в stack. Если они не согласуются, то возвращаем позицию текущего символа в строке + 1.
+        return i + 1;
+      }
+    }
+  }
+  if (stack.length === 0) {//Если stack пустой после прохода по всей строке, то все скобки в строке были расставлены корректно, и мы возвращаем строку "yes".
+    return 'yes';
+  } else {//Если в stack остались элементы, то это означает, что есть открывающие скобки без закрывающих, и мы возвращаем количество таких скобок в виде длинны стека этих скобок.
+    return stack.length;
+  }
+}
+
+
+
+
+
+function test_checkBrackets(){
+
+let input = "((((";
+let expectedResult = 4;
+
+console.assert(JSON.stringify(checkBrackets(input)) === JSON.stringify((expectedResult)), "Тест 1 провален");
+
+
+input = "(Привет мир!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!()";
+expectedResult = 1;
+
+console.assert(JSON.stringify(checkBrackets(input)) === JSON.stringify((expectedResult)), "Тест 2 провален");
+
+input = "(Привет мир!!!!!!!!!!()!!!!!!!!!!!!!!!!!!!!!)";
+expectedResult = "yes";
+
+console.assert(JSON.stringify(checkBrackets(input)) === JSON.stringify((expectedResult)), "Тест 3 провален");
+
+
+
+}
+
+
+
+test_checkBrackets()
+
+
+
+let str = prompt("введите строки на проверку скобок");
+let result = checkBrackets(str);
+
+document.write(result);
+
+
+
+
+
+
+
+
+
+
+
+</script>

@@ -1,0 +1,75 @@
+<script>
+
+function getIntFromUser(promptString){
+   let arr = promptString.split(',');//делим строку, делитель - запятая
+
+   let rows = arr[0];//строки матрицы в начале5
+   let columns = arr[1];//потом столбцы
+    
+    if(!isNaN(rows) && !isNaN(columns) && !(rows <= 0) && !(columns <= 0)){
+        return [rows, columns];//возвращает два значения (строка и столбец)
+    } else {
+        return -1;
+    }
+}
+
+
+function getRandomInt(min,max) {
+    return Math.round(Math.random()*(max-min + 1) + min);
+}
+
+function getRandomMatrix(input){
+let result = getIntFromUser(input);
+let rows = result[0];
+let columns = result[1];
+let matrix = [];//создаем пустой массив, наша будущая матрица
+
+for(let i = 0; i<rows; i++){//проходимся по циклу, чтобы создать нужное количество строк
+    let row = [];//создаем строку
+    for(let j = 0; j<columns; j++){//создаем столбец
+        row.push(getRandomInt(-10, 10));//пушим туда рандомное число
+    }
+    matrix.push(row);//пушим получившуюся строку в массив матрицы
+}
+return matrix;    
+
+}
+
+
+let input = prompt("Введите количеств строк и столбцов в матрице через запятую.");
+
+
+let matrix = getRandomMatrix(input);
+
+
+function showMatrix(matrix){
+
+document.writeln('<table style = "width: 50%; border: 1px solid black; text-align: center;">');
+
+for(let i in matrix){
+
+document.writeln('<tr style = "border: 1px solid black;">');
+
+for(let j in matrix[i]){
+document.writeln('<td style = "border: 1px solid black;">');
+document.writeln(matrix[i][j]);
+document.writeln('</td>');
+
+}
+
+document.writeln('</tr>');
+
+}
+document.writeln('</table>');
+
+}
+
+
+
+showMatrix(matrix);
+
+
+
+
+
+</script>

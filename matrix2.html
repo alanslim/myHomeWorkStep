@@ -1,0 +1,83 @@
+<script>
+
+
+
+function getRandomInt(min,max) {
+    return Math.round(Math.random()*(max-min + 1) + min);
+}
+
+function getRandomMatrix(N, M){
+
+let rows = N;
+let columns = M;
+
+let matrix = [];//создаем пустой массив, наша будущая матрица
+
+for(let i = 0; i<rows; i++){//проходимся по циклу, чтобы создать нужное количество строк
+    let row = [];//создаем строку
+    for(let j = 0; j<columns; j++){//создаем столбец
+        row.push(getRandomInt(-10, 10));//пушим в строку рандомное число
+    }
+    matrix.push(row);//пушим получившуюся строку в массив матрицы
+}
+return matrix;    
+
+}
+
+
+function showMatrix(matrix){
+
+document.writeln('<table style = "width: 50%; border: 1px solid black; text-align: center;">');
+
+for(let i in matrix){
+
+document.writeln('<tr style = "border: 1px solid black;">');
+
+for(let j in matrix[i]){
+document.writeln('<td style = "border: 1px solid black;">');
+document.writeln(matrix[i][j]);
+document.writeln('</td>');
+
+}
+
+document.writeln('</tr>');
+
+}
+document.writeln('</table>');
+
+}
+
+function sumOddMatrix(matrix){
+let count = 0;
+let count2 = 0;
+for(let row of matrix){
+let sum = 0;
+count++;
+    for(let column of row){
+        if(column%2 !==0){
+            sum+=column;
+        }
+    }
+document.write(`<br> Сумма нечетных в строке номер ${count}: ${sum},`);
+}
+
+for(let j = 0; j<matrix[0].length; j++){
+    let sum = 0;
+    count2++;
+    for(let i = 0; i<matrix.length; i++){
+        if(matrix[i][j] %2 !== 0){
+            sum +=matrix[i][j];
+        }
+    }
+    document.write(`<br> Сумма нечетных в столбце номер ${count2}: ${sum},`);
+}
+
+
+}
+
+let matrix = getRandomMatrix(5, 5);
+showMatrix(matrix);
+sumOddMatrix(matrix);
+
+
+</script>

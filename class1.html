@@ -1,0 +1,141 @@
+<script>
+class Animal {
+
+    constructor(name, weight, size){
+        this.name = name;
+        this.weight = weight;
+        this.size = size;
+    }
+    
+    talk = function() {
+        alert("MMMMMMM");
+    }
+    eat(meal) {
+    this.size += meal.length;
+    this.weight += meal.length;
+    }
+}
+
+
+class Herbivore extends Animal {
+    constructor(name, weight, size, ratio){
+        super(name, weight, size);
+        this.ratio = ratio;
+    }
+
+    eat(meal) {
+        if(this.ratio.includes(meal)){
+        this.size += meal.length;
+        this.weight += meal.length;
+        alert(`${this.name} съел ${meal}`);
+        } else {
+            alert(`${this.name} не может есть ${meal}`);
+        }
+    }
+}
+
+
+class Predator extends Animal {
+    constructor(name, weight, size){
+        super(name, weight, size);
+        this.prey = [];//тут будут храниться съеденные жертвы =(
+    }
+
+    eat(meal){
+        if(meal instanceof Animal && meal.weight < this.weight && meal.size < this.size && !this.prey.includes(meal) && !meal.flying ) {
+            this.prey.push(meal);
+            this.size = this.size + meal.size * 0.2;
+            this.weight = this.weight + meal.weight * 0.2;
+            alert(`Какой ужас, ${this.name} съел ${meal.name}! Теперь его вес составляет ${this.weight}, а размер - ${this.size}!`);
+        } else if (meal instanceof Animal && meal.flying) {
+            alert(`${this.name} не смог съесть ${meal.name} потому что он улетел!`);
+        } else {
+            alert("Животное съеденное или слишком большое и не подходит для питания.");
+        }
+    }
+
+}
+
+class Goose extends Herbivore {
+
+constructor(name, weight, size, ratio, flying){
+    super(name, weight, size, ratio);
+    this.flying = flying;
+}
+
+talk = function() {
+    alert(`${this.name} агрессивно говорит: GaGaGaGaGa!`);
+}
+
+fly = function() {
+    if (this.flying) {
+        alert(`${this.name} летит!`);
+    } else {
+        alert (`${this.name} не может летать!`)
+    }
+    
+}
+
+}
+
+class Wolf extends Predator {
+    constructor(name, weight, size, speed){
+        super(name, weight, size);
+        this.speed = speed;
+    }
+
+    talk = function(){
+        alert(`${this.name} начинает лаять и скулеть при виде Гуся: Woof Woof Woof`);
+    }
+
+    speedup = function(){
+        alert("Наш волк увидел жертву и ускорился в два раза!");
+        this.speed = this.speed * 2;
+    }
+    
+    eat(meal){
+        if ((meal instanceof Animal && !(meal instanceof Wolf) && meal.weight < this.weight && meal.size < this.size && !this.prey.includes(meal) && !meal.flying) || (meal instanceof Wolf)) {
+            alert(`Кошмар! ${this.name} обезумел, съел ${meal.name} и стал каннибалом! Теперь его вес составляет: ${this.weight}, а размер ${this.size}!`);
+            this.name = "Каннибал" + this.name;
+            this.prey.push(meal);
+            this.size = this.size + meal.size * 0.2;
+            this.weight = this.weight + meal.weight * 0.2;
+
+        } else {
+            super.eat(meal);
+        }
+    }
+}
+    
+
+
+let herbFood = ["Травка", "Корешки", "Листики", "Веточки"];
+
+
+let wolf1 = new Wolf("Матерый волчара", 50, 120, 25);
+let wolf2 = new Wolf("Так себе волчек", 30, 110, 25);;
+
+let goose1 = new Goose("Гусь Крутой", 20, 50, herbFood, true);
+let goose2 = new Goose("Гусь не такой крутой", 10, 15, herbFood, false);
+
+
+
+wolf1.talk();
+goose1.talk();
+
+goose1.eat("Травка"); //почему не выводится alert?!
+
+console.log('после goose1.eat');
+
+wolf2.eat(goose1);
+goose1.fly();
+
+wolf1.eat(goose2);
+
+wolf1.eat(wolf2);
+
+wolf1.talk();
+
+
+
+</script>

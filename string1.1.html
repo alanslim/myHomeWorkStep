@@ -1,0 +1,80 @@
+<script type="text/javascript">
+
+function replace(str) {
+  let nums = str.split('');
+
+  for (let i = 0; i < nums.length; i++) {
+    switch (nums[i]) {
+      case "1":
+        nums[i] = "Один";
+        break;
+      case "2":
+        nums[i] = "Два";
+        break;
+      case "3":
+        nums[i] = "Три";
+        break;
+      case "4":
+        nums[i] = "Четыре";
+        break;
+      case "5":
+        nums[i] = "Пять";
+        break;
+      case "6":
+        nums[i] = "Шесть";
+        break;
+      case "7":
+        nums[i] = "Семь";
+        break;
+      case "8":
+        nums[i] = "Восемь";
+        break;
+      case "9":
+        nums[i] = "Девять";
+        break;
+      case "0":
+        nums[i] = "Ноль";
+        break;
+      default:
+        break;
+    }
+  }
+
+  return nums.join('');
+}
+
+
+function test_replace(){
+
+let input = "5 4 3 4 5 5";
+let expectedResult = "Пять Четыре Три Четыре Пять Пять";
+
+console.assert(JSON.stringify(replace(input)) === JSON.stringify((expectedResult)), "Тест 1 провален");
+
+
+input = "1 1 2 2 3 3 4 4 5 5 1";
+
+expectedResult = "Один Один Два Два Три Три Четыре Четыре Пять Пять Один";
+console.assert(JSON.stringify(replace(input)) === JSON.stringify((expectedResult)), "Тест 2 провален");
+
+
+
+}
+
+test_replace();
+
+let str = "1 2 3 4 5 6 7 8 9 0";
+let result = replace(str);
+document.write(result);
+
+
+
+
+
+
+
+
+
+
+
+</script>

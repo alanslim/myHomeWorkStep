@@ -1,0 +1,42 @@
+<script type="text/javascript">
+
+function analyzeFunctionDescription(description) {
+  // получаем имя функции
+  let functionName = description.substring(description.indexOf("function ") + 9, description.indexOf("(")).trim();
+  
+  // получаем строку со списком аргументов
+  let argsString = description.substring(description.indexOf("(") + 1, description.indexOf(")"));
+  
+  // создаем массив для хранения аргументов
+  let args = [];
+  
+  // проверяем, есть ли в списке аргументов значения по умолчанию
+  let hasDefaultValues = argsString.includes("=");
+  
+  // разбиваем строку со списком аргументов на массив
+  argsString.split(",").forEach((argString, index) => {
+    // получаем имя аргумента и убираем лишние пробелы
+    let argName = argString.trim();
+    
+    // получаем значение по умолчанию (если оно есть)
+    let defaultValue = hasDefaultValues && argString.includes("=") ? argString.substring(argString.indexOf("=") + 1).trim() : undefined;
+    
+    // добавляем информацию об аргументе в массив
+    args.push({ name: argName, defaultValue: defaultValue });
+  });
+
+  // выводим результат
+document.write(`Имя функции: ${functionName}<br>`);
+  document.write(`Количество аргументов: ${args.length}<br>`);
+  args.forEach((arg, index) => {
+    document.write(`  Имя аргумента ${index + 1}: ${arg.name}, значение по умолчанию: ${arg.defaultValue !== undefined ? arg.defaultValue : 'undefined '}`);
+  });
+}
+
+analyzeFunctionDescription("function foo(index, len, flag = true, obj = {a: 1, b: '2'}) { /* тело функции */ }");
+
+  
+
+
+
+</script>

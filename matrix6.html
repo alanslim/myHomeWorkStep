@@ -1,0 +1,101 @@
+<script>
+    function getRandomInt(min,max) {
+        return Math.round(Math.random()*(max-min + 1) + min);
+    }
+    
+    function getMatrix(N, M){
+    
+    let rows = N;
+    let columns = M;
+    
+    let matrix = [];//создаем пустой массив, наша будущая матрица
+    let input;
+    for(let i = 0; i<rows; i++){//проходимся по циклу, чтобы создать нужное количество строк
+        let row = [];//создаем строку
+        let values = prompt(`Введите ${columns} чисел для ${i+1}-й строки, разделенных запятой: `);
+        let valuesArr = values.split(',');
+        if (valuesArr.length !== columns) {
+            alert("Неверное количество значений в строке");
+            return null;
+        }
+        for(let j = 0; j<columns; j++){//создаем столбец
+            let value = parseInt(valuesArr[j], 10);
+            if (isNaN(value)) {
+                alert("Неверное значение в строке");
+                return null;
+            }
+            row.push(value);//пушим в строку рандомное число
+        }
+        matrix.push(row);//пушим получившуюся строку в массив матрицы
+    }
+    return matrix;    
+    
+    }
+    
+    
+    function showMatrix(matrix){
+    
+    document.writeln('<table style = "width: 50%; border: 1px solid black; text-align: center;">');
+    
+    for(let i in matrix){
+    
+    document.writeln('<tr style = "border: 1px solid black;">');
+    
+    for(let j in matrix[i]){
+    document.writeln('<td style = "border: 1px solid black;">');
+    document.writeln(matrix[i][j]);
+    document.writeln('</td>');
+    
+    }
+    
+    document.writeln('</tr>');
+    
+    }
+    document.writeln('</table>');
+    
+    }
+    
+    
+
+  
+    function isMagicSquare(matrix) {
+  const n = matrix.length;
+  const diagonalSum1 = matrix.reduce((sum, row, i) => sum + row[i], 0);
+  const diagonalSum2 = matrix.reduce((sum, row, i) => sum + row[n-i-1], 0);
+  
+  // Проверяем суммы строк и столбцов
+  for(let i=0; i<n; i++) {
+    const rowSum = matrix[i].reduce((sum, el) => sum + el, 0);
+    const colSum = matrix.reduce((sum, row) => sum + row[i], 0);
+    if(rowSum !== colSum || rowSum !== diagonalSum1 || rowSum !== diagonalSum2) {
+      return false;
+    }
+  }
+  
+  return true;
+}
+
+
+    
+    
+    let matrix = getMatrix(5, 5);
+
+    showMatrix(matrix);
+    
+    isMagicSquare(matrix);
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </script>

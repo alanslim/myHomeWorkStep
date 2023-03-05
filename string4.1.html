@@ -1,0 +1,79 @@
+<script type="text/javascript">
+	
+function calculateRPN(str) {
+	var stack = [];
+
+  var string = str.split(" ");
+
+
+	for (let i = 0; i<string.length; i++) {
+
+		if (string[i] == "+"){
+			var b = stack.pop();
+			var a = stack.pop();
+			stack.push(a+b);
+
+		}   else if (string[i] == '-') {
+      var b = stack.pop();
+      var a = stack.pop();
+      stack.push(a - b);
+    } else if (string[i] == '*') {
+      var b = stack.pop();
+      var a = stack.pop();
+      stack.push(a * b);
+    } else if (string[i] == '/') {
+      var b = stack.pop();
+      var a = stack.pop();
+      stack.push(a / b);
+    } else {
+      stack.push(Number(string[i]));
+    }
+
+
+	}
+
+
+
+
+return stack[0];
+
+}
+
+
+function test_calculateRPN(){
+
+let input1 = "3 8 *";
+let expectedResult1 = 24;
+
+console.assert(JSON.stringify(calculateRPN(input1)) === JSON.stringify((expectedResult1)), "Тест 1 провален");
+
+let input2 = "15 9 + 6 /";
+let expectedResult2 = 4;
+
+console.assert(JSON.stringify(calculateRPN(input2)) === JSON.stringify((expectedResult2)), "Тест 2 провален");
+
+
+
+
+
+}
+
+test_calculateRPN();
+
+
+let str = "12 3 - 3 /";
+let result = calculateRPN(str);
+
+alert(result);
+
+
+
+
+
+
+
+
+
+
+
+</script>

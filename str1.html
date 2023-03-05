@@ -1,0 +1,70 @@
+<script>
+//В строке заменить все цифры соответствующими словами.
+
+
+function numToWords(str){
+
+let nums = [];
+
+for(let i = 0; i<str.length; i++){ 
+
+    switch(str[i]){
+        case "1": 
+        nums.push("Один ");
+        break;
+        case "2":
+        nums.push("Два ");
+        break;
+        case "3": 
+        nums.push("Три ");
+        break;
+        case "4": 
+        nums.push("Четыре ");
+        break;
+        case "5":
+        nums.push("Пять ");
+        break;
+        case "6": 
+        nums.push("Шесть ");
+        break;
+        case "7": 
+        nums.push("Семь ");
+        break;
+        case "8": 
+        nums.push("Восемь ");
+        break;
+        case "9": 
+        nums.push("Девять ");
+        break;
+        case "0": 
+        nums.push("Ноль ");
+        break;
+        default: break;
+
+    }
+
+
+
+
+}
+
+
+return nums;
+
+
+}
+
+let str = prompt("Введите цифры через пробел");
+let string = str.split(" ");
+let result = numToWords(string);
+document.write(result);
+
+
+
+
+
+
+
+
+
+</script>
